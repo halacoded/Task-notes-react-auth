@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { login } from "../api/auth";
 import { useMutation } from "@tanstack/react-query";
 import UserContext from "../context/UserContext";
+import { Navigate } from "react-router-dom";
 const Login = () => {
   const [userInfo, setUserInfo] = useState({});
   const [user, setUser] = useContext(UserContext);
@@ -17,7 +18,9 @@ const Login = () => {
     e.preventDefault();
     mutate();
   };
-
+  if (user) {
+    return <Navigate to="/" />;
+  }
   return (
     <div className="bg-gray-900 min-h-screen flex items-center justify-center absolute inset-0 z-[-1]">
       <div style={{ color: "white" }}>{`${user}`}</div>;
